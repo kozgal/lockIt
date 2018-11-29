@@ -2,54 +2,123 @@ import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { WalletCreationComponent } from "../walletCreation/walletCreation";
 import { Wallet, WalletDetailsComponent } from "../walletDetail/walletDetails";
+import { NativeStorage } from "@ionic-native/native-storage";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
   baseAccount = {
     currency: 'DKK',
     balance: 28332
   };
 
-  wallets: Wallet[] = [
-    {
-      currency: 'NOK',
-      totalBalance: 20000,
-      availableBalance: 4036,
-      daysLeft: 28,
-      transactions: [
-        {headline: 'Conf tickets', date: '29/11/18', amount: 466},
-        {headline: 'TNW deposit', date: '27/11/18', amount: 1039},
-        {headline: 'Steel shipment', date: '27/11/18', amount: 1699},
-        {headline: 'Voodoo Lounge', date: '26/11/18', amount: 25},
-        {headline: 'BDash*Bar', date: '26/11/18', amount: 839},
-        {headline: 'TransferWayGroupLtd', date: '24/11/18', amount: 2499},
-        {headline: 'Office Desk', date: '22/11/18', amount: 1479}]
-    },
-    {
-      currency: 'EUR',
-      totalBalance: 6000,
-      availableBalance: 5000,
-      daysLeft: 4
-    },
-    {
-      currency: 'SEK',
-      totalBalance: 15000,
-      availableBalance: 12000,
-      daysLeft: 12
-    },
-    {
-      currency: 'USD',
-      totalBalance: 30000,
-      availableBalance: 20000,
-      daysLeft: 50
-    }
-  ];
+  wallets: Wallet[] = [];
 
-  constructor(public modalCtrl: ModalController) {
+  constructor(private modalCtrl: ModalController,
+              private nativeStorage: NativeStorage) {
+    setTimeout(() => {
+      this.nativeStorage.getItem('wallets')
+        .then(
+          (data) => {
+            if (data && data.length) {
+              this.wallets = data;
+
+              setInterval(this.loadWallet.bind(this), 100);
+            } else {
+              this.wallets = [
+                {
+                  currency: 'NOK',
+                  totalBalance: 20000,
+                  availableBalance: 4036,
+                  daysLeft: 28,
+                  transactions: [
+                    {headline: 'Conf tickets', date: '29/11/18', amount: 466},
+                    {headline: 'TNW deposit', date: '27/11/18', amount: 1039},
+                    {headline: 'Steel shipment', date: '27/11/18', amount: 1699},
+                    {headline: 'Voodoo Lounge', date: '26/11/18', amount: 25},
+                    {headline: 'BDash*Bar', date: '26/11/18', amount: 839},
+                    {headline: 'TransferWayGroupLtd', date: '24/11/18', amount: 2499},
+                    {headline: 'Office Desk', date: '22/11/18', amount: 1479}]
+                },
+                {
+                  currency: 'EUR',
+                  totalBalance: 6000,
+                  availableBalance: 5000,
+                  daysLeft: 4
+                },
+                {
+                  currency: 'SEK',
+                  totalBalance: 15000,
+                  availableBalance: 12000,
+                  daysLeft: 12
+                },
+                {
+                  currency: 'USD',
+                  totalBalance: 30000,
+                  availableBalance: 20000,
+                  daysLeft: 50
+                }
+              ];
+
+              this.nativeStorage.setItem('wallets', this.wallets).then(() => {
+                setInterval(this.loadWallet.bind(this), 100);
+              });
+            }
+          }, () => {
+            this.wallets = [
+              {
+                currency: 'NOK',
+                totalBalance: 20000,
+                availableBalance: 4036,
+                daysLeft: 28,
+                transactions: [
+                  {headline: 'Conf tickets', date: '29/11/18', amount: 466},
+                  {headline: 'TNW deposit', date: '27/11/18', amount: 1039},
+                  {headline: 'Steel shipment', date: '27/11/18', amount: 1699},
+                  {headline: 'Voodoo Lounge', date: '26/11/18', amount: 25},
+                  {headline: 'BDash*Bar', date: '26/11/18', amount: 839},
+                  {headline: 'TransferWayGroupLtd', date: '24/11/18', amount: 2499},
+                  {headline: 'Office Desk', date: '22/11/18', amount: 1479}]
+              },
+              {
+                currency: 'EUR',
+                totalBalance: 6000,
+                availableBalance: 5000,
+                daysLeft: 4
+              },
+              {
+                currency: 'SEK',
+                totalBalance: 15000,
+                availableBalance: 12000,
+                daysLeft: 12
+              },
+              {
+                currency: 'USD',
+                totalBalance: 30000,
+                availableBalance: 20000,
+                daysLeft: 50
+              }
+            ];
+
+            this.nativeStorage.setItem('wallets', this.wallets).then(() => {
+              setInterval(this.loadWallet.bind(this), 100);
+            });
+          });
+    },100);
+  }
+
+  loadWallet() {
+    this.nativeStorage.getItem('wallets')
+      .then(
+        (data) => {
+
+          if (data) {
+            this.wallets = data;
+          }
+        }
+      );
   }
 
   openWalletModal() {
@@ -64,6 +133,8 @@ export class HomePage {
           daysLeft: data.duration,
           transactions: []
         });
+
+        setTimeout(() => {this.nativeStorage.setItem('wallets', this.wallets)});
       }
     });
 
@@ -76,6 +147,8 @@ export class HomePage {
     walletDetailsModal.onDidDismiss((data) => {
       if (data === 'delete') {
         this.wallets.splice(index, 1);
+
+        setTimeout(() => {this.nativeStorage.setItem('wallets', this.wallets)});
       }
     });
 
