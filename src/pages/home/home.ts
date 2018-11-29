@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { WalletCreationComponent } from "../walletCreation/walletCreation";
+import { Wallet, WalletDetailsComponent } from "../walletDetail/walletDetails";
 
 @Component({
   selector: 'page-home',
@@ -13,12 +14,20 @@ export class HomePage {
     balance: 28332
   };
 
-  wallets = [
+  wallets: Wallet[] = [
     {
       currency: 'NOK',
       totalBalance: 20000,
-      availableBalance: 5000,
-      daysLeft: 28
+      availableBalance: 4036,
+      daysLeft: 28,
+      transactions: [
+        {headline: 'Conf tickets', date: '29/11/18', amount: 466},
+        {headline: 'TNW deposit', date: '27/11/18', amount: 1039},
+        {headline: 'Steel shipment', date: '27/11/18', amount: 1699},
+        {headline: 'Voodoo Lounge', date: '26/11/18', amount: 25},
+        {headline: 'BDash*Bar', date: '26/11/18', amount: 839},
+        {headline: 'TransferWayGroupLtd', date: '24/11/18', amount: 2499},
+        {headline: 'Office Desk', date: '22/11/18', amount: 1479}]
     },
     {
       currency: 'EUR',
@@ -52,11 +61,24 @@ export class HomePage {
           currency: data.currency,
           totalBalance: data.balance,
           availableBalance: data.balance,
-          daysLeft: data.duration
+          daysLeft: data.duration,
+          transactions: []
         });
       }
     });
 
     walletInfoModal.present();
+  }
+
+  openWalletDetails(wallet, index) {
+    let walletDetailsModal = this.modalCtrl.create(WalletDetailsComponent, {wallet: wallet});
+
+    walletDetailsModal.onDidDismiss((data) => {
+      if (data === 'delete') {
+        this.wallets.splice(index, 1);
+      }
+    });
+
+    walletDetailsModal.present();
   }
 }

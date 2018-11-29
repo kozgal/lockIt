@@ -11,11 +11,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WalletCreationComponent } from "../pages/walletCreation/walletCreation";
+import { WalletDetailsComponent } from "../pages/walletDetail/walletDetails";
 
 @NgModule({
   declarations: [
     MyApp,
     WalletCreationComponent,
+    WalletDetailsComponent,
     AboutPage,
     ContactPage,
     HomePage,
@@ -29,6 +31,7 @@ import { WalletCreationComponent } from "../pages/walletCreation/walletCreation"
   entryComponents: [
     MyApp,
     WalletCreationComponent,
+    WalletDetailsComponent,
     AboutPage,
     ContactPage,
     HomePage,

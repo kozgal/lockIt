@@ -14,7 +14,8 @@
 
   <ion-list no-lines>
     <button ion-item
-            *ngFor="let wallet of wallets">
+            *ngFor="let wallet of wallets; index as walletIndex"
+            (click)="openWalletDetails(wallet, walletIndex)">
       <H2>{{wallet.currency}} Wallet:</H2>
       <p>{{wallet.daysLeft}} days left</p>
       <span item-end>{{wallet.availableBalance}} {{wallet.currency}}</span>

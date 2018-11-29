@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-item item-start (click)="back();">
+      <ion-icon name="arrow-back"></ion-icon>
+      <span>Back</span>
+    </ion-item>
+    <ion-title>Lockit © by Nordea</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <h2 style="text-align: center; font-weight: bold">{{wallet.currency}} Wallet</h2>
+    </ion-item>
+    <ion-item>
+      <span item-start>Available balance:</span>
+      <span item-end>{{wallet.availableBalance}} {{wallet.currency}}</span>
+    </ion-item>
+    <ion-item>
+      <span item-start>Time left:</span>
+      <span item-end> {{wallet.daysLeft > 30 ? (wallet.daysLeft / 30).toString().substring(0, 3) + ' Month(s)' : wallet.daysLeft + ' Days'}}</span>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <h3 padding-left>{{wallet.transactions && wallet.transactions.length ? 'Latest transactions' : 'This wallet has no transactions to show'}}</h3>
+    <ion-item *ngFor="let transaction of wallet.transactions">
+      <span>{{transaction.date}} - </span>
+      <span>{{transaction.headline}}: </span>
+      <span item-end>{{transaction.amount}} {{wallet.currency}}</span>
+    </ion-item>
+
+    <button margin-top ion-button full round
+            color="red"
+            (click)="deleteWallet();">Delete Wallet</button>
+  </ion-list>
+</ion-content>
