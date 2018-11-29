@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Lockit © by Nordea</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <span item-start>Base Account:</span>
+      <span item-end>{{baseAccount.balance}} {{baseAccount.currency}}</span>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-lines>
+    <button ion-item
+            *ngFor="let wallet of wallets">
+      <H2>{{wallet.currency}} Wallet:</H2>
+      <p>{{wallet.daysLeft}} days left</p>
+      <span item-end>{{wallet.availableBalance}} {{wallet.currency}}</span>
+    </button>
+
+    <ion-item (click)="openWalletModal();">
+      <ion-icon name="add"></ion-icon>
+      <span>Add Wallet</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

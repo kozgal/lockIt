@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button item-start ion-button color="dark" clear
+            (click)="cancel();">Cancel</button>
+    <ion-title>Lockit © by Nordea</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="showForm">
+    <ion-item>
+      <ion-label>Currency</ion-label>
+      <ion-select [(ngModel)]="walletData.currency">
+        <ion-option value="USD">USD</ion-option>
+        <ion-option value="NOK">NOK</ion-option>
+        <ion-option value="SEK">SEK</ion-option>
+        <ion-option value="EUR">EUR</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number"
+                 placeholder="Amount"
+                 [(ngModel)]="walletData.balance"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Wallet Duration</ion-label>
+      <ion-select [(ngModel)]="walletData.duration">
+        <ion-option value="30">1 Month</ion-option>
+        <ion-option value="60">2 Months</ion-option>
+        <ion-option value="120">4 Months</ion-option>
+        <ion-option value="180">6 Months</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button full round
+          *ngIf="showForm"
+          (click)="requestPrice();"
+          [disabled]="!walletData.duration || !walletData.currency || !walletData.balance">Request Wallet</button>
+
+  <div *ngIf="showPrice">
+    <h3>Your locked rate for {{walletData.currency}}DKK is 7.217</h3>
+    <h3>Price per month: 35DKK for a running period of {{walletData.duration / 30}} month(s) = {{35 * (walletData.duration / 30) + 'DKK'}}</h3>
+    <button ion-button full round
+            (click)="addWallet();">Accept</button>
+    <button ion-button full round clear
+            (click)="reject();">Reject</button>
+  </div>
+</ion-content>
