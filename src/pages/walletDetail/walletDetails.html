@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar>
-    <ion-item item-start (click)="back();">
-      <ion-icon name="arrow-back"></ion-icon>
-      <span>Back</span>
+    <ion-item class="blue-background" item-start (click)="back();">
+      <ion-icon class="white-text" name="arrow-back"></ion-icon>
+      <span class="white-text">Back</span>
     </ion-item>
-    <ion-title>Lockit © by Nordea</ion-title>
+    <ion-title>Lockit by Nordea</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -28,7 +28,7 @@
     <ion-item *ngFor="let transaction of wallet.transactions">
       <span>{{transaction.date}} - </span>
       <span>{{transaction.headline}}: </span>
-      <span item-end>{{transaction.amount}} {{wallet.currency}}</span>
+      <span item-end>-{{transaction.amount}} {{wallet.currency}}</span>
     </ion-item>
 
     <button margin-top ion-button full round

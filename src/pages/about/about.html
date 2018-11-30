@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Lockit © by Nordea</ion-title>
+    <ion-title>Lockit by Nordea</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,7 +9,8 @@
   <ion-grid style="padding-top: 80px">
     <ion-row>
       <ion-col *ngFor="let wallet of wallets">
-        <ion-card padding>
+        <ion-card padding
+                  (click)="pickWallet(wallet)">
           <H2>{{wallet.currency}}</H2>
           <span>Balance: {{wallet.availableBalance}}</span>
           <p style="margin-top: 6px">{{wallet.daysLeft}} days left</p>

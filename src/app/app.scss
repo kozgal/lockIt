@@ -1,6 +1,44 @@
 // http://ionicframework.com/docs/theming/
 
+.toolbar-background {
+  background-color: #00005e !important;
+}
 
+.toolbar-title {
+  color: white !important;
+}
+
+.button-ios {
+  background-color: #00005e !important;
+  color: #fff !important;
+}
+
+.button-clear-ios {
+  color: #00005e !important;
+  background-color: transparent !important;
+}
+
+.blue-text {
+  color: #00005e !important;
+}
+
+.blue-background {
+  background-color: #00005e !important;
+}
+
+.white-text {
+  color: #fff !important;
+}
+
+.transparent-background {
+  background: transparent !important;
+}
+
+h1,
+h2,
+h3 {
+  color: #00005e !important;
+}
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These

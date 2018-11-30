@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-item class="blue-background" item-start (click)="cancel();">
+      <ion-icon class="white-text" name="arrow-back"></ion-icon>
+      <span class="white-text">Cancel</span>
+    </ion-item>
+    <ion-title>Lockit by Nordea</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="!chosen">
+    <button margin-top ion-button full round
+            (click)="payCard();">Pay by card (NFC)</button>
+    <button margin-top ion-button full round clear
+            (click)="payInvoice();">Pay Invoice</button>
+  </ion-list>
+
+  <ion-list *ngIf="chosen === 'card'">
+    <ion-item>
+      <ion-input type="number"
+                 placeholder="Amount"
+                 [(ngModel)]="payment.amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="payment.headline" placeholder="Identifier"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Transaction Date</ion-label>
+      <ion-datetime pickerFormat="DD/MM/YY" displayFormat="DD/MM/YY" [(ngModel)]="payment.date"></ion-datetime>
+    </ion-item>
+    <button ion-button full round
+            [disabled]="!payment.headline || !payment.date || !payment.amount"
+            (click)="doPayment();">Pay</button>
+  </ion-list>
+</ion-content>

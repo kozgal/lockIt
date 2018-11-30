@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WalletCreationComponent } from "../pages/walletCreation/walletCreation";
 import { WalletDetailsComponent } from "../pages/walletDetail/walletDetails";
+import { PaymentComponent } from "../pages/payment/payment";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,6 +19,7 @@ import { NativeStorage } from "@ionic-native/native-storage";
   declarations: [
     MyApp,
     WalletCreationComponent,
+    PaymentComponent,
     WalletDetailsComponent,
     AboutPage,
     ContactPage,
@@ -33,6 +35,7 @@ import { NativeStorage } from "@ionic-native/native-storage";
     MyApp,
     WalletCreationComponent,
     WalletDetailsComponent,
+    PaymentComponent,
     AboutPage,
     ContactPage,
     HomePage,

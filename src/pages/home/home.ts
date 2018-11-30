@@ -46,19 +46,22 @@ export class HomePage {
                   currency: 'EUR',
                   totalBalance: 6000,
                   availableBalance: 5000,
-                  daysLeft: 4
+                  daysLeft: 4,
+                  transactions: []
                 },
                 {
                   currency: 'SEK',
                   totalBalance: 15000,
                   availableBalance: 12000,
-                  daysLeft: 12
+                  daysLeft: 12,
+                  transactions: []
                 },
                 {
                   currency: 'USD',
                   totalBalance: 30000,
                   availableBalance: 20000,
-                  daysLeft: 50
+                  daysLeft: 50,
+                  transactions: []
                 }
               ];
 
@@ -86,19 +89,22 @@ export class HomePage {
                 currency: 'EUR',
                 totalBalance: 6000,
                 availableBalance: 5000,
-                daysLeft: 4
+                daysLeft: 4,
+                transactions: []
               },
               {
                 currency: 'SEK',
                 totalBalance: 15000,
                 availableBalance: 12000,
-                daysLeft: 12
+                daysLeft: 12,
+                transactions: []
               },
               {
                 currency: 'USD',
                 totalBalance: 30000,
                 availableBalance: 20000,
-                daysLeft: 50
+                daysLeft: 50,
+                transactions: []
               }
             ];
 
